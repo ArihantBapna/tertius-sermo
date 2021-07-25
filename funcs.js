@@ -1,4 +1,11 @@
-module.exports.checkLog = function checkLog(req, loc){
-    if(req.session.loggedIn) return loc;
-    else return 'pages/login';
+module.exports = {
+    checkLog: function (req, loc){
+        if(req.session.loggedIn) return loc;
+        else return 'pages/login';
+    },
+    returnSets: function (req){
+        if(req.session.loggedIn) return JSON.parse(req.session.sets);
+        else return '';
+    }
+
 }

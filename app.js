@@ -8,6 +8,7 @@ var bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var setsRouter = require('./routes/sets');
 
 var mongoose = require('mongoose');
 if(process.env.NODE_ENV !== 'production'){
@@ -38,6 +39,7 @@ app.use(session({
 
 
 app.use('/', indexRouter);
+app.use('/sets', setsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

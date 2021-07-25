@@ -12,6 +12,8 @@ router.post('/log',async function (req, res, next) {
   if(user){
     req.session.loggedIn = true;
     req.session.username = user.username;
+    req.session.sets = user.sets;
+    req.session.scores = user.scores;
   }
   res.redirect('/');
 });
