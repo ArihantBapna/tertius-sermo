@@ -1,0 +1,29 @@
+<% sets.forEach(function(value) { %>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <%=value.name%>
+        </div>
+        <canvas id="<%=value.name%>" width="100" height="100"></canvas>
+    </div>
+    <script>
+        var ctx = document.getElementById('<%=value.name%>').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['14','15','16','17','18','19','20','21','22','25','26'],
+                datasets: [{
+                    label: 'Values',
+                    data: [<%=value.cat15%>,<%=value.cat16%>,<%=value.cat17%>,<%=value.cat18%>,<%=value.cat19%>,<%=value.cat20%>,<%=value.cat21%>,<%=value.cat22%>, <%=value.cat25%>,<%=value.cat26%>],
+                    backgroundColor: ['#4CAF50', '#00BCD4', '#E91E63', '#FFC107', '#9E9E9E','#8DB600','#FBCEB1','#00FFFF','#A52A2A','#FE6F5E','#DE5D83']
+                }]
+            },
+            options: {
+                plugins:{
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+<%});%>

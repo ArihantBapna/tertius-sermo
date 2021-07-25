@@ -8,10 +8,11 @@
     <body>
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <% sets.forEach(function(value) { %>
-            <li><%=value.name%></li>
-        <%});%>
+        <%-include('../partials/sets/scripts/chartScript.ejs')%>
+        <%-include('../partials/sets/chart.ejs')%>
 
         <%-include('../partials/globals/footer.ejs')%>
     </body>
+
+
 </html>
