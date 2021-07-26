@@ -10,40 +10,30 @@
 
         <%-include('../partials/sets/scripts/chartCdn.ejs')%>
 
+        <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
         <div class="container">
-            <hr>
-            <h3>
-                Edit: <%=chosenSet.name%> -
-                <small class="text-muted" id="totalHolder">Total: 1</small>
-            </h3>
-            <hr>
-            <div class="row row-cols-lg-4 row-cols-sm-1 row-cols-md-2 justify-content-center">
-                <%-include('../partials/editSets/rangeSelect.ejs')%>
-            </div>
 
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    <form class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputSearch" placeholder="Answers">
-                        <label for="floatingInputSearch">Search Answers</label>
-                    </form>
-                </div>
-                <div class="col-1 my-auto">
-                    <button id="startSearch" class="btn btn-primary">Search</button>
-                </div>
-            </div>
-            <br>
+            <!-- Title of the page -->
+            <%-include('../partials/editSets/titleHold.ejs')%>
 
-            <script>
-                $(document).ready(function() {
-                    $('#startSearch').click(function (){
+            <!-- Range selectors from ejs -->
+            <%-include('../partials/editSets/rangeSelect.ejs')%>
 
-                    });
-                });
-            </script>
+            <!-- Search Answers input field -->
+            <%-include('../partials/editSets/searchAnswer.ejs')%>
 
+            <!-- Answers table init -->
+            <%-include('../partials/editSets/answersTable.ejs')%>
+
+            <!-- Answers table scripts -->
+            <%-include('../partials/editSets/scripts/tableScript.ejs')%>
+            <%-include('../partials/editSets/scripts/socketUpdateScript.ejs')%>
+
+            <!-- Save buttons html -->
             <%-include('../partials/editSets/saveButtons.ejs')%>
-            <br>
+
         </div>
 
         <%-include('../partials/editSets/scripts/rangeScript.ejs')%>

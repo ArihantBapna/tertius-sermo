@@ -12,5 +12,6 @@
     <orderEntry type="library" name="crypto-js" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
+    <orderEntry type="library" name="socket.io" level="application" />
   </component>
 </module>

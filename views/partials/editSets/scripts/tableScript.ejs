@@ -1,0 +1,28 @@
+<!-- Change to min after production -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+<script>
+    var socket = io(':5000');
+    var $table = $('#answersTable');
+    $table.bootstrapTable({});
+    socket.on('found_answers', function(answers){
+        $table.bootstrapTable('destroy');
+        $table.bootstrapTable({data: answers});
+    });
+</script>
+
+<script>
+    function buttons(){
+        return {
+            btnAdd: {
+                text: 'Add',
+                icon: 'fa-plus',
+                event: function () {
+                    alert($table.bootstrapTable('getSelections'));
+                },
+                attributes: {
+                    title: 'Add answer lines to set'
+                }
+            }
+        }
+    }
+</script>

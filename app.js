@@ -6,9 +6,16 @@ var logger = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser')
 
+var cors = require('cors');
+var http = require('http');
+
+var answerModel = require('./models/answers');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var setsRouter = require('./routes/sets');
+
+
 
 var mongoose = require('mongoose');
 if(process.env.NODE_ENV !== 'production'){
@@ -29,6 +36,29 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
+
+var server = http.createServer(app);
+var io = require('socket.io')(server, {
+  cors:{
+    origin: 'http://localhost:3000',
+    methods: ["GET", "POST"]
+  }
+});
+
+server.listen('5000', () => {
+  console.log('Server listening on Port 3000');
+})
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('searchQuery', async (search) => {
+    console.log(search);
+    var answers = await answerModel.find({ANSWER: new RegExp(search, 'i')}).limit(100).sort({FREQUENCY: -1});
+    socket.emit('found_answers', answers);
+  });
+});
 
 //Sessions
 app.use(session({
@@ -59,3 +89,4 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+

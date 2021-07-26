@@ -1,0 +1,7 @@
+<script>
+    $(document).ready(function() {
+        $('#startSearch').click(function (){
+            socket.emit('searchQuery', $('#floatingInputSearch').val());
+        });
+    });
+</script>
