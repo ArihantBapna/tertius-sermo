@@ -13,5 +13,6 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="socket.io" level="application" />
+    <orderEntry type="library" name="bootstrap-table" level="application" />
   </component>
 </module>
