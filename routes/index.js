@@ -11,6 +11,7 @@ router.get('/logout', function (req,res,next){
   req.session.loggedIn = false;
   req.session.username = '';
   req.session.sets = '';
+  req.session.chosenSet = '';
   res.redirect('/');
 });
 

@@ -3,15 +3,17 @@
         <div class="col d-flex justify-content-center">
             <div class="card" style="width: 18rem;">
                 <div class="card-header">
-                    <%=value.name%>
+                    <%=value.name%> - <%=value.answerLines.length%> answers
                 </div>
                 <canvas id="<%=value.name%>" width="100" height="100"></canvas>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Edit</a>
+                    <div class="row">
+                        <a href="sets/edit/<%=value.name%>" class="btn btn-primary">Edit</a>
+                    </div>
                 </div>
             </div>
-
         </div>
+
         <script>
             var ctx = document.getElementById('<%=value.name%>').getContext('2d');
             var chart = new Chart(ctx, {
@@ -20,7 +22,7 @@
                     labels: ['Mythology','Literature','Trash','Science','History','Religion','Geography','Fine Arts','Social Sciences','Philosophy','Current Events'],
                     datasets: [{
                         label: 'Values',
-                        data: [<%=value.cat15%>,<%=value.cat16%>,<%=value.cat17%>,<%=value.cat18%>,<%=value.cat19%>,<%=value.cat20%>,<%=value.cat21%>,<%=value.cat22%>, <%=value.cat25%>,<%=value.cat26%>],
+                        data: [<%=value.cat14%>,<%=value.cat15%>,<%=value.cat16%>,<%=value.cat17%>,<%=value.cat18%>,<%=value.cat19%>,<%=value.cat20%>,<%=value.cat21%>, <%=value.cat22%>,<%=value.cat25%>, <%=value.cat26%>],
                         //backgroundColor: ['#488f31', '#729e39', '#97ac46', '#bbba57', '#dec86b','#ffd682','#fbb96c','#f59c5d','#ed7e54','#e25f50','#de425b']
                         //backgroundColor: ['#de1d1d','#e33f00','#e35a00','#e07200','#d98900','#ce9f00','#bfb400','#acc800','#91db00','#6bed00','#00ff32']
                         backgroundColor: ['#1900ff','#3500f6','#4400ee','#4f00e5','#5700dd','#5e00d5','#6300cd','#6700c5', '#6a00be', '#6c00b6', '#6e02af']
@@ -41,4 +43,17 @@
             });
         </script>
     <%});%>
+    <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Create a new set
+            </div>
+            <canvas width="100" height="100"></canvas>
+            <div class="card-footer">
+                <div class="row">
+                    <a href="sets/create" class="btn btn-primary">Create</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
