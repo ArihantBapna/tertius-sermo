@@ -20,16 +20,27 @@
             <div class="row row-cols-lg-4 row-cols-sm-1 row-cols-md-2 justify-content-center">
                 <%-include('../partials/editSets/rangeSelect.ejs')%>
             </div>
-            <div class="container d-flex justify-content-center">
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary">Save</button>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-danger">Delete</button>
-                    </div>
+
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <form class="form-floating">
+                        <input type="text" class="form-control" id="floatingInputSearch" placeholder="Answers">
+                        <label for="floatingInputSearch">Search Answers</label>
+                    </form>
+                </div>
+                <div class="col-1 my-auto">
+                    <button class="btn btn-primary">Search</button>
                 </div>
             </div>
+            <br>
+
+            <script>
+                $('#floatingInputSearch').on('input', function(){
+                   console.log('typing...');
+                });
+            </script>
+
+            <%-include('../partials/editSets/saveButtons.ejs')%>
             <br>
         </div>
 
