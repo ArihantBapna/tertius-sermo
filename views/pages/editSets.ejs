@@ -29,14 +29,16 @@
                     </form>
                 </div>
                 <div class="col-1 my-auto">
-                    <button class="btn btn-primary">Search</button>
+                    <button id="startSearch" class="btn btn-primary">Search</button>
                 </div>
             </div>
             <br>
 
             <script>
-                $('#floatingInputSearch').on('input', function(){
-                   console.log('typing...');
+                $(document).ready(function() {
+                    $('#startSearch').click(function (){
+
+                    });
                 });
             </script>
 

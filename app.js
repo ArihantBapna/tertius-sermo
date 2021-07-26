@@ -10,6 +10,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var setsRouter = require('./routes/sets');
 
+var WebSocket = require('ws');
+var wss = new WebSocket.Server({port: 8080});
+
+
+//Websocket
+wss.on('connection', ws => {
+
+});
+
 var mongoose = require('mongoose');
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').config();
