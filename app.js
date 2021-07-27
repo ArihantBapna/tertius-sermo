@@ -48,11 +48,10 @@ var io = require('socket.io')(server, {
 });
 
 server.listen('5000', () => {
-  console.log('Server listening on Port 3000');
+  console.log('Socket Server is running on port 5000')
 })
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
   socket.on('searchQuery', async (search) => {
     console.log(search);
     var answers = await answerModel.find({ANSWER: new RegExp(search, 'i')}).limit(100).sort({FREQUENCY: -1});

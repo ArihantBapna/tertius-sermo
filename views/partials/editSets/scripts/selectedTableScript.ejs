@@ -1,0 +1,24 @@
+<script>
+    function deleteButton(){
+        return{
+            redDelete: {
+                text: 'Delete',
+                icon: 'fa-trash',
+                event: function(){
+                    var selected = $selectedTable.bootstrapTable('getSelections');
+                    var toDel = selected.map(a => a.ID);
+                    $selectedTable.bootstrapTable('remove',{field: 'ID', values: toDel});
+                },
+                attributes: {
+                    style: "background-color: #dc3545 !important; border-color: #dc3545 !important"
+                }
+            }
+        }
+    }
+</script>
+
+<script>
+    var $selectedTable = $('#selectedTable');
+    var dat = <%-JSON.stringify(chosenSet.answerLines)%>
+        $selectedTable.bootstrapTable({data: dat});
+</script>

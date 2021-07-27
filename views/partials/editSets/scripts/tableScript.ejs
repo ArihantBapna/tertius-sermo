@@ -17,7 +17,16 @@
                 text: 'Add',
                 icon: 'fa-plus',
                 event: function () {
-                    alert($table.bootstrapTable('getSelections'));
+                    var toAdd = $table.bootstrapTable('getSelections');
+                    var existData = $selectedTable.bootstrapTable('getData');
+
+                    var noRepeats = toAdd.filter(val => !existData.includes(val));
+                    $selectedTable.bootstrapTable('append', noRepeats);
+                    $table.bootstrapTable('uncheckAll');
+                    $selectedTable.bootstrapTable('uncheckAll');
+
+                    document.getElementById('answerTitle').scrollIntoView();
+
                 },
                 attributes: {
                     title: 'Add answer lines to set'
