@@ -26,8 +26,14 @@ router.post('/create', async function (req, res, next) {
     var createSet = req.body;
     var allSets = JSON.parse(req.session.sets);
     createSet.id = allSets.length + 1;
-
     allSets.push(createSet);
+
+    var count = 1;
+    allSets.forEach(p => {
+        p.id = count;
+        count++;
+    });
+
     var query = {'username': req.session.username};
     var result = await userModel.update(query, {sets: JSON.stringify(allSets)});
 
@@ -42,6 +48,12 @@ router.post('/save', async function (req, res, next) {
 
     var saveIndex = allSets.findIndex(i => i.id === saveSet.id);
     allSets[saveIndex] = saveSet;
+
+    var count = 1;
+    allSets.forEach(p => {
+        p.id = count;
+        count++;
+    });
 
     var query = {'username': req.session.username};
     var result = await userModel.update(query, {sets: JSON.stringify(allSets)});
@@ -60,6 +72,12 @@ router.post('/delete', async function(req, res, next){
     allSets = allSets.filter(function(v, i, arr){
         return v.id !== dat.id;
     })
+
+    var count = 1;
+    allSets.forEach(p => {
+        p.id = count;
+        count++;
+    });
 
     var query = {'username': req.session.username};
     var result = await userModel.update(query, {sets: JSON.stringify(allSets)});
