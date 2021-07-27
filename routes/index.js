@@ -9,8 +9,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/logout', function (req,res,next){
   req.session.loggedIn = false;
+
   req.session.username = '';
+  //sets is a stringified version of the sets object
   req.session.sets = '';
+  //chosenSet is the object itself in json version
   req.session.chosenSet = '';
   res.redirect('/');
 });

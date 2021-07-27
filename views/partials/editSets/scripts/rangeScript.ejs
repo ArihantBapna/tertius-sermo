@@ -24,8 +24,7 @@
     function setNewTotal(){
         var total = calculateTotal();
         document.getElementById('totalHolder').innerHTML = 'Total: ' +total.toFixed(2);
-
-        if(total === 1){
+        if(Math.abs(total-1) < 0.001){
             document.getElementById('totalHolder').classList.add('alert-success');
             document.getElementById('totalHolder').classList.remove('alert-danger');
         }else{
