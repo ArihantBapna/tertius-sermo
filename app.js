@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
+//Change during production edition
 var server = http.createServer(app);
 var io = require('socket.io')(server, {
   cors:{
@@ -47,10 +48,13 @@ var io = require('socket.io')(server, {
   }
 });
 
+//Initialize server for socket instance
 server.listen('5000', () => {
   console.log('Socket Server is running on port 5000')
 })
 
+
+//Socket.io controller (use in modules when setup)
 io.on('connection', (socket) => {
   socket.on('searchQuery', async (search) => {
     console.log(search);
@@ -67,6 +71,7 @@ app.use(session({
 }));
 
 
+//Defined express routes
 app.use('/', indexRouter);
 app.use('/sets', setsRouter);
 app.use('/users', usersRouter);
