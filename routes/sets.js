@@ -28,40 +28,50 @@ router.post('/create', async function (req, res, next) {
     createSet.id = allSets.length + 1;
     allSets.push(createSet);
 
-    var count = 1;
-    allSets.forEach(p => {
-        p.id = count;
-        count++;
-    });
+    var total = parseFloat(createSet.cat14) + parseFloat(createSet.cat15) + parseFloat(createSet.cat16) + parseFloat(createSet.cat17) + parseFloat(createSet.cat18) + parseFloat(createSet.cat19) + parseFloat(createSet.cat20) + parseFloat(createSet.cat21) + parseFloat(createSet.cat22) + parseFloat(createSet.cat25) + parseFloat(createSet.cat26);
 
-    var query = {'username': req.session.username};
-    var result = await userModel.update(query, {sets: JSON.stringify(allSets)});
+    if(total !== 1){
+        res.send('close');
+    }else{
+        var count = 1;
+        allSets.forEach(p => {
+            p.id = count;
+            count++;
+        });
 
-    req.session.sets = JSON.stringify(allSets);
-    res.send(result);
+        var query = {'username': req.session.username};
+        var result = await userModel.updateOne(query, {sets: JSON.stringify(allSets)});
 
+        req.session.sets = JSON.stringify(allSets);
+        res.send(result);
+    }
 });
 
 router.post('/save', async function (req, res, next) {
     var saveSet = req.body;
     var allSets = JSON.parse(req.session.sets);
 
-    var saveIndex = allSets.findIndex(i => i.id === saveSet.id);
-    allSets[saveIndex] = saveSet;
+    var total = parseFloat(saveSet.cat14) + parseFloat(saveSet.cat15) + parseFloat(saveSet.cat16) + parseFloat(saveSet.cat17) + parseFloat(saveSet.cat18) + parseFloat(saveSet.cat19) + parseFloat(saveSet.cat20) + parseFloat(saveSet.cat21) + parseFloat(saveSet.cat22) + parseFloat(saveSet.cat25) + parseFloat(saveSet.cat26);
+    if(total !== 1){
+        res.send('close');
+    }else{
+        var saveIndex = allSets.findIndex(i => i.id === saveSet.id);
+        allSets[saveIndex] = saveSet;
 
-    var count = 1;
-    allSets.forEach(p => {
-        p.id = count;
-        count++;
-    });
+        var count = 1;
+        allSets.forEach(p => {
+            p.id = count;
+            count++;
+        });
 
-    var query = {'username': req.session.username};
-    var result = await userModel.update(query, {sets: JSON.stringify(allSets)});
+        var query = {'username': req.session.username};
+        var result = await userModel.updateOne(query, {sets: JSON.stringify(allSets)});
 
-    //Set the session sets to allSets
-    req.session.sets = JSON.stringify(allSets);
+        //Set the session sets to allSets
+        req.session.sets = JSON.stringify(allSets);
 
-    res.send(result);
+        res.send(result);
+    }
 
 });
 
