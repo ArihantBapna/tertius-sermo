@@ -1,0 +1,20 @@
+<script>
+    $(document).ready(function() {
+        $('#deleteButton').click(function(){
+            var id = parseInt($('#setId').text());
+            var dat = {id: id};
+            $.ajax({
+                type: "POST",
+                url: "../delete",
+                data: JSON.stringify(dat),
+                contentType: 'application/json',
+                success: function(res){
+                    window.location.href = "/sets";
+                }.bind(this),
+                error: function(xhr, status, err){
+                    console.error(xhr, status, err.toString());
+                }.bind(this)
+            });
+        });
+    });
+</script>

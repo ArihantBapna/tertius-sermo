@@ -25,7 +25,9 @@
                     $table.bootstrapTable('uncheckAll');
                     $selectedTable.bootstrapTable('uncheckAll');
 
+                    document.getElementById('totalSavedNum').text = noRepeats.length + parseInt(document.getElementById('totalSavedNum').text);
                     document.getElementById('answerTitle').scrollIntoView();
+
 
                 },
                 attributes: {
