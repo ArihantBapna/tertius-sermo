@@ -14,7 +14,7 @@ var answerModel = require('./models/answers');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var setsRouter = require('./routes/sets');
-
+var trainRouter = require('./routes/train');
 
 
 var mongoose = require('mongoose');
@@ -75,6 +75,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/sets', setsRouter);
 app.use('/users', usersRouter);
+app.use('/train', trainRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
