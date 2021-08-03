@@ -41,12 +41,23 @@ app.use(cors());
 
 //Change during production edition
 var server = http.createServer(app);
-var io = require('socket.io')(server, {
-  cors:{
-    origin: 'http://localhost:3000',
-    methods: ["GET", "POST"]
-  }
-});
+var io;
+
+if(process.env.NODE_ENV !== 'production'){
+  io = require('socket.io')(server, {
+    cors:{
+      origin: 'https://tertius-sermo-web.herokuapp.com:'+(process.env.PORT || 3000),
+      methods: ["GET", "POST"]
+    }
+  });
+}else{
+  io = require('socket.io')(server, {
+    cors:{
+      origin: 'https://localhost:'+(process.env.PORT || 3000),
+      methods: ["GET", "POST"]
+    }
+  });
+}
 
 //Initialize server for socket instance
 server.listen('5000', () => {
