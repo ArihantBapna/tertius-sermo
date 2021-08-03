@@ -43,7 +43,7 @@ app.use(cors());
 var server = http.createServer(app);
 var io;
 
-if(process.env.NODE_ENV !== 'production'){
+if(process.env.NODE_ENV == 'production'){
   io = require('socket.io')(server, {
     cors:{
       origin: 'https://tertius-sermo-web.herokuapp.com:'+(process.env.PORT || 3000),
