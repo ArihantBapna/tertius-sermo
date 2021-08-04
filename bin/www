@@ -34,7 +34,8 @@ if(process.env.NODE_ENV === 'production'){
     cors:{
       origin: 'http://localhost:3000',
       methods: ["GET", "POST"]
-    }
+    },
+    transports: ['polling']
   });
 }
 io.listen(server);
