@@ -39,41 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
-//Change during production edition
-var server = http.createServer(app);
-var io;
-
-if(process.env.NODE_ENV == 'production'){
-  io = require('socket.io')(server, {
-    cors:{
-      origin: 'https://tertius-sermo-web.herokuapp.com:'+(process.env.PORT || 3000),
-      methods: ["GET", "POST"]
-    }
-  });
-}else{
-  io = require('socket.io')(server, {
-    cors:{
-      origin: 'https://localhost:'+(process.env.PORT || 3000),
-      methods: ["GET", "POST"]
-    }
-  });
-}
-
-//Initialize server for socket instance
-server.listen('5000', () => {
-  console.log('Socket Server is running on port 5000')
-})
-
-
-//Socket.io controller (use in modules when setup)
-io.on('connection', (socket) => {
-  socket.on('searchQuery', async (search) => {
-    console.log(search);
-    var answers = await answerModel.find({ANSWER: new RegExp(search, 'i')}).limit(100).sort({FREQUENCY: -1});
-    socket.emit('found_answers', answers);
-  });
-});
-
 //Sessions
 app.use(session({
   secret: 'secret',

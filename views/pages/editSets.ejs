@@ -9,51 +9,15 @@
 
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <%-include('../partials/sets/scripts/chartCdn.ejs')%>
+        <div class="holder">
+            <%-include('../partials/sets/scripts/chartCdn.ejs')%>
 
-        <%-include('../partials/editSets/scripts/tableInitScript.ejs')%>
+            <%-include('../partials/editSets/scripts/tableInitScript.ejs')%>
 
-        <div class="container">
+            <%-include('../partials/editSets/addElements.ejs')%>
 
-            <!-- Title of the page -->
-            <%-include('../partials/editSets/titleHold.ejs')%>
-
-            <!-- Range selectors from ejs -->
-            <%-include('../partials/editSets/rangeSelect.ejs')%>
-
-            <!-- Included Answerlines title -->
-            <%-include('../partials/editSets/answerTitle.ejs')%>
-
-            <!-- Selected Answers Table -->
-            <%-include('../partials/editSets/selectedAnswersTable.ejs')%>
-
-            <!-- Search Answers input field -->
-            <%-include('../partials/editSets/searchAnswer.ejs')%>
-
-            <!-- Search answers scripts -->
-            <%-include('../partials/editSets/scripts/selectedTableScript.ejs')%>
-
-
-            <!-- Answers table init -->
-            <%-include('../partials/editSets/answersTable.ejs')%>
-
-            <!-- Answers table scripts -->
-            <%-include('../partials/editSets/scripts/tableScript.ejs')%>
-            <%-include('../partials/editSets/scripts/socketUpdateScript.ejs')%>
-
-            <!-- Save buttons html -->
-            <%-include('../partials/editSets/saveButtons.ejs')%>
-            <%-include('../partials/editSets/scripts/cancelButtonScript.ejs')%>
-
-            <%-include('../partials/editSets/dangerToast.ejs')%>
-
-            <!-- Save button script -->
-            <%-include('../partials/editSets/scripts/saveButtonScript.ejs')%>
-            <%-include('../partials/editSets/scripts/deleteButtonScript.ejs')%>
-
+            <%-include('../partials/editSets/scripts/rangeScript.ejs')%>
         </div>
-
-        <%-include('../partials/editSets/scripts/rangeScript.ejs')%>
 
         <%-include('../partials/globals/footer.ejs')%>
 

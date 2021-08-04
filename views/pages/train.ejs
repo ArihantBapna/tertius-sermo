@@ -8,13 +8,17 @@
         <%-include('../partials/globals/navbar.ejs')%>
 
         <div class="container py-2">
-            <nav class="navbar navbar-dark bg-transparent">
-                <div class="container-fluid justify-content-end">
-                    <button class="btn btn-primary me-2" type="button">Next</button>
-                    <button class="btn btn-success me-2" type="button">Buzz</button>
-                    <button class="btn btn-warning me-2" type="button">Pause</button>
+            <!-- Swipeable interface? Carousel -->
+            <div class="card" id="swipeCard">
+                <div class="body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
                 </div>
-            </nav>
+            </div>
+            <!-- Buttons -->
         </div>
 
         <%-include('../partials/globals/footer.ejs')%>

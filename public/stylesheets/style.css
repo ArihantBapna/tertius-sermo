@@ -1,5 +1,6 @@
-body {
+body, html{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 
 a {

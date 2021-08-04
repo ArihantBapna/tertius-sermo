@@ -1,0 +1,41 @@
+<div class="container">
+
+    <!-- Title of the page -->
+    <div class="row py-3">
+        <%-include('titleHold.ejs')%>
+    </div>
+
+    <!-- Range selectors from ejs -->
+    <%-include('rangeSelect.ejs')%>
+
+    <!-- Included Answerlines title -->
+    <%-include('answerTitle.ejs')%>
+
+    <!-- Selected Answers Table -->
+    <%-include('selectedAnswersTable.ejs')%>
+
+    <!-- Search Answers input field -->
+    <%-include('searchAnswer.ejs')%>
+
+    <!-- Search answers scripts -->
+    <%-include('scripts/selectedTableScript.ejs')%>
+
+
+    <!-- Answers table init -->
+    <%-include('answersTable.ejs')%>
+
+    <!-- Answers table scripts -->
+    <%-include('scripts/tableScript.ejs')%>
+    <%-include('scripts/socketUpdateScript.ejs')%>
+
+    <!-- Save buttons html -->
+    <%-include('saveButtons.ejs')%>
+    <%-include('scripts/cancelButtonScript.ejs')%>
+
+    <%-include('dangerToast.ejs')%>
+
+    <!-- Save button script -->
+    <%-include('scripts/saveButtonScript.ejs')%>
+    <%-include('scripts/deleteButtonScript.ejs')%>
+
+</div>

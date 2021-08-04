@@ -9,47 +9,13 @@
 
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <%-include('../partials/createSet/scripts/tableInitScript.ejs')%>
+        <div class="holder">
+            <%-include('../partials/createSet/scripts/tableInitScript.ejs')%>
 
-        <div class="container">
+            <%-include('../partials/createSet/addElements.ejs')%>
 
-            <!-- Title of the page -->
-            <%-include('../partials/createSet/titleInput.ejs')%>
-
-            <!-- Range selectors from ejs -->
-            <%-include('../partials/createSet/rangeSelect.ejs')%>
-
-            <!-- Included Answerlines title -->
-            <%-include('../partials/createSet/answerTitle.ejs')%>
-
-            <!-- Selected Answers Table -->
-            <%-include('../partials/createSet/selectedAnswersTable.ejs')%>
-
-            <!-- Search Answers input field -->
-            <%-include('../partials/editSets/searchAnswer.ejs')%>
-
-            <!-- Answers table init -->
-            <%-include('../partials/editSets/answersTable.ejs')%>
-
-            <!-- Answers table scripts -->
-            <%-include('../partials/editSets/scripts/tableScript.ejs')%>
-            <%-include('../partials/editSets/scripts/socketUpdateScript.ejs')%>
-
-            <!-- Selected Table Script -->
-            <%-include('../partials/createSet/scripts/selectedTableScript.ejs')%>
-
-            <!-- Create button -->
-            <%-include('../partials/createSet/createButton.ejs')%>
-            <%-include('../partials/editSets/scripts/cancelButtonScript.ejs')%>
-
-            <%-include('../partials/createSet/dangerToast.ejs')%>
-
-            <!-- Create button script -->
-            <%-include('../partials/createSet/scripts/createButtonScript.ejs')%>
-
+            <%-include('../partials/createSet/scripts/rangeScript.ejs')%>
         </div>
-
-        <%-include('../partials/createSet/scripts/rangeScript.ejs')%>
 
         <%-include('../partials/globals/footer.ejs')%>
 

@@ -1,0 +1,39 @@
+<div class="container">
+
+    <!-- Title of the page -->
+    <div class="row py-3">
+        <%-include('titleInput.ejs')%>
+    </div>
+
+    <!-- Range selectors from ejs -->
+    <%-include('rangeSelect.ejs')%>
+
+    <!-- Included Answerlines title -->
+    <%-include('answerTitle.ejs')%>
+
+    <!-- Selected Answers Table -->
+    <%-include('selectedAnswersTable.ejs')%>
+
+    <!-- Search Answers input field -->
+    <%-include('../editSets/searchAnswer.ejs')%>
+
+    <!-- Answers table init -->
+    <%-include('../editSets/answersTable.ejs')%>
+
+    <!-- Answers table scripts -->
+    <%-include('../editSets/scripts/tableScript.ejs')%>
+    <%-include('../editSets/scripts/socketUpdateScript.ejs')%>
+
+    <!-- Selected Table Script -->
+    <%-include('scripts/selectedTableScript.ejs')%>
+
+    <!-- Create button -->
+    <%-include('createButton.ejs')%>
+    <%-include('../editSets/scripts/cancelButtonScript.ejs')%>
+
+    <%-include('dangerToast.ejs')%>
+
+    <!-- Create button script -->
+    <%-include('scripts/createButtonScript.ejs')%>
+
+</div>
