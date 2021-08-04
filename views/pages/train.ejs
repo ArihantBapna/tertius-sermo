@@ -7,35 +7,98 @@
     <body>
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <div class="holder">
+        <div class="holder" id="flashCards">
 
-            <div class="container d-flex justify-content-center">
-                <!-- Swipeable interface? Carousel -->
-                <div class="row my-3">
-                    <div class="card" id="swipeCard" style="width: 18rem;">
-                        <div class="body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
+            <div class="reveal">
+                <div class="slides" style="font-size: 7rem;">
+                    <section>Slide 1</section>
+                    <section>Slide 2</section>
                 </div>
-                <!-- Buttons -->
             </div>
 
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-        <script>
-            var ele = document.getElementById('swipeCard');
-            var hs = new Hammer(ele);
-            hs.on('swipe', function(ev){
-               console.log(ev);
-            });
-        </script>
+
 
         <%-include('../partials/globals/footer.ejs')%>
+        <script src="/javascripts/plugins/customcontrol/plugin.js"></script>
+
+        <!-- Reveal configurations -->
+        <script>
+            function doNext(){
+                Reveal.next();
+            }
+            function doPrev(){
+                Reveal.prev();
+            }
+            function doUp(){
+                Reveal.up();
+            }
+            function doDown() {
+                Reveal.down();
+            }
+
+            Reveal.initialize({
+                controls: false,
+                controlsTutorial: true,
+                progress: false,
+                slideNumber: false,
+                touch: false,
+                // Learn about plugins: https://revealjs.com/plugins/
+            });
+            Reveal.configure({
+                keyboard:{
+                    //Move to the right
+                    39: () => {doNext()}, // Right arrow
+                    76: null, // L
+                    78: null, //N
+                    32: null, // Space
+
+                    //Move to the left
+                    80: null, // P
+                    37: () => {doPrev()}, // Left arrow
+                    72: null, // H
+
+                    //Move up
+                    38: () => {doUp()}, // Up Arrow
+                    75: null, // K
+
+                    //Move down
+                    40: () => {doDown()},
+                    74: null, // J
+
+                    // Pause
+                    66: null, // B
+                    190: null, // Period
+
+                    // Overview
+                    27: null, // Esc
+                    79: null, // O
+
+
+
+                }
+            })
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            var fc = document.getElementById("flashCards");
+            var mc = new Hammer(fc);
+            mc.on('swipeleft', function(ev) {
+               doNext();
+            });
+            mc.on('swiperight', function (ev){
+                doPrev();
+            });
+            mc.on('swipeup', function(ev){
+                doUp();
+            });
+            mc.on('swipedown', function(ev){
+               doDown();
+            });
+        </script>
+        <script src="https://unpkg.com/default-passive-events@2.0.0/dist/index.umd.js"></script>
+
     </body>
 
 </html>
