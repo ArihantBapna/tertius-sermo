@@ -15,5 +15,6 @@
     <orderEntry type="library" name="socket.io" level="application" />
     <orderEntry type="library" name="bootstrap-table" level="application" />
     <orderEntry type="library" name="popper.js" level="application" />
+    <orderEntry type="library" name="hammer.js" level="application" />
   </component>
 </module>

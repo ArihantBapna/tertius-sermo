@@ -7,19 +7,33 @@
     <body>
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <div class="container py-2">
-            <!-- Swipeable interface? Carousel -->
-            <div class="card" id="swipeCard">
-                <div class="body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+        <div class="holder">
+
+            <div class="container d-flex justify-content-center">
+                <!-- Swipeable interface? Carousel -->
+                <div class="row my-3">
+                    <div class="card" id="swipeCard" style="width: 18rem;">
+                        <div class="body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
                 </div>
+                <!-- Buttons -->
             </div>
-            <!-- Buttons -->
+
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+        <script>
+            var ele = document.getElementById('swipeCard');
+            var hs = new Hammer(ele);
+            hs.on('swipe', function(ev){
+               console.log(ev);
+            });
+        </script>
 
         <%-include('../partials/globals/footer.ejs')%>
     </body>

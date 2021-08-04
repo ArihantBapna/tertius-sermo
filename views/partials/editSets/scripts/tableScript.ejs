@@ -8,7 +8,6 @@
     socket.on('found_answers', function(answers){
         $table.bootstrapTable('destroy');
         $table.bootstrapTable({data: answers});
-        $hold.css('height', ($hold.outerHeight() + $table.height()));
         $('html,body').animate(
             {
                 scrollTop: $table.offset().top,
