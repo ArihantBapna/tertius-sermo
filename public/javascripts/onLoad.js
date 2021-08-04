@@ -1,6 +1,13 @@
 $(document).ready(function() {
-    var winHeight = $(document).height();
-    var navHeight = $('#finNavbar').outerHeight();
-    var holdHeight = winHeight - navHeight - $('#finFooter').height();
-    $('.holder').css('height',holdHeight);
+    setBodyHeight();
 })
+$(window).on("resize", function(){
+    setBodyHeight();
+})
+
+function setBodyHeight(){
+    var winHeight = $(document).outerHeight();
+    var navHeight = $('#finNavbar').outerHeight();
+    var holdHeight = winHeight - navHeight - $('#finFooter').outerHeight();
+    $('.holder').css('height',holdHeight);
+}
