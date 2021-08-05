@@ -3,7 +3,6 @@ $(document).ready(function() {
 })
 $(window).on("resize", function(){
     setBodyHeight();
-    console.log(window.innerHeight);
 })
 
 function setBodyHeight(){
