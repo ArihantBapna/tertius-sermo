@@ -10,16 +10,14 @@
         <div class="holder" id="flashCards">
 
             <div class="reveal">
-                <div class="slides" style="font-size: 7rem;">
-                    <section>Slide 1</section>
-                    <section>Slide 2</section>
-                    <section>
+                <div class="slides font-monospace">
+                    <%clues.forEach(c => {%>
                         <section>
-                            <h2 class="r-fit-text">VS 1</h2>
+                            <section class="vertical-center"><p><%-c.CLUE%></p></section>
+                            <section class="vertical-center"><p><%-c.ANSWER%></p></section>
+                            <section class="vertical-center"><p><%-c.ANSWER_ID%></p></section>
                         </section>
-                        <section>VS 2</section>
-                        <section>VS 3</section>
-                    </section>
+                    <%})%>
                 </div>
             </div>
 
@@ -28,20 +26,31 @@
 
         <%-include('../partials/globals/footer.ejs')%>
         <script src="/javascripts/plugins/customcontrol/plugin.js"></script>
-
+        <script src="/javascripts/fitty.js"></script>
         <!-- Reveal configurations -->
         <script>
             function doNext(){
                 Reveal.right();
+                adjustText(Reveal.getCurrentSlide());
             }
             function doPrev(){
                 Reveal.left();
+                adjustText(Reveal.getCurrentSlide());
+
             }
             function doUp(){
                 Reveal.up();
+                adjustText(Reveal.getCurrentSlide());
             }
             function doDown() {
                 Reveal.down();
+                adjustText(Reveal.getCurrentSlide());
+
+            }
+
+            function adjustText(slide){
+                var child = slide.childNodes[0];
+                fitty(child);
             }
 
             Reveal.initialize({
@@ -50,8 +59,14 @@
                 progress: false,
                 slideNumber: false,
                 touch: false,
+                disableLayout: true,
+                loop: true,
                 // Learn about plugins: https://revealjs.com/plugins/
             });
+
+            Reveal.initialize().then(() => {
+                adjustText(Reveal.getCurrentSlide());
+            })
             Reveal.configure({
                 keyboard:{
                     //Move to the right
@@ -79,7 +94,7 @@
 
                     // Overview
                     27: null, // Esc
-                    79: null, // O
+                    //79: null, // O
 
 
 
@@ -91,6 +106,7 @@
         <script>
             var fc = document.getElementById("flashCards");
             var mc = new Hammer(fc);
+            mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
             mc.on('swipeleft', function(ev) {
                doNext();
             });
@@ -98,9 +114,11 @@
                 doPrev();
             });
             mc.on('swipeup', function(ev){
+                console.log(ev);
                 doUp();
             });
             mc.on('swipedown', function(ev){
+                console.log(ev);
                doDown();
             });
         </script>

@@ -11,6 +11,14 @@ body, html{
   overflow-y: auto;
 }
 
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 a {
   color: #00B7FF;
 }
@@ -24,10 +32,4 @@ a {
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-}
-
-.scroller {
-  width: 300px;
-  height: 100px;
-  overflow-y: scroll;
 }

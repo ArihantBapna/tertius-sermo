@@ -16,5 +16,6 @@
     <orderEntry type="library" name="bootstrap-table" level="application" />
     <orderEntry type="library" name="popper.js" level="application" />
     <orderEntry type="library" name="hammer.js" level="application" />
+    <orderEntry type="library" name="fitty" level="application" />
   </component>
 </module>
