@@ -1,18 +1,26 @@
 <script>
     var $prog = $('#progCount');
+    var completed = 0;
+    var initTotal = Reveal.getTotalSlides();
     function doNext(){
         Reveal.right();
         adjustText(Reveal.getCurrentSlide());
-        var prog = (Reveal.getProgress() * 100);
-        $prog.width(prog+'%');
+        completed++;
+        updateProg((completed / initTotal) * 100);
 
     }
     function doPrev(){
-        Reveal.left();
+        var $slide = $(Reveal.getCurrentSlide().parentNode);
+        Reveal.right();
         adjustText(Reveal.getCurrentSlide());
-        var prog = (Reveal.getProgress() * 100);
-        $prog.width(prog+'%');
+
+        //Add slide to stack between 7 and 25 elements from current index
+
+        var rand = randomIntFromInterval(7,25)
+        var $chosen = $slide.nextAll().slice(rand, rand+1);
+        $slide.insertAfter($chosen);
     }
+
     function doUp(){
         Reveal.up();
         adjustText(Reveal.getCurrentSlide());
@@ -28,5 +36,17 @@
 
     function doLeft(){
         Reveal.left();
+        adjustText(Reveal.getCurrentSlide());
+        completed--;
+        updateProg((completed / initTotal) * 100)
     }
+
+    function updateProg(prog){
+        $prog.width(prog+'%');
+    }
+
+    function randomIntFromInterval(min, max) { // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
 </script>

@@ -13,12 +13,14 @@
             controls: [
                 { icon: '<i class="fa fa-caret-left"></i>',
                     css: 'position: fixed; left: 10px; bottom: 50px; z-index: 30; font-size: 5rem;',
-                    action: 'doPrev(); return false;'
+                    action: 'doLeft(); return false;'
                 },
+                /* Don't think we should have a move right option (why would you want to see the next clue without answering this one)
                 { icon: '<i class="fa fa-caret-right"></i>',
                     css: 'position: fixed; right: 10px; bottom: 50px; z-index: 30; font-size: 5rem;',
                     action: 'doNext(); return false;'
                 }
+                 */
             ]
         },
     });
