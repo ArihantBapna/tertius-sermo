@@ -1,0 +1,13 @@
+<script>
+    function setMaxfont(subChild){
+        var screenWidth = screen.width;
+        var finSize = parseFloat(window.getComputedStyle(subChild,null).getPropertyValue('font-size'));
+        if(screenWidth <= 576){
+            if(finSize > 30) subChild.style.fontSize = 30 + 'px';
+        }else if(screenWidth <= 768){
+            if(finSize > 45) subChild.style.fontSize = 45 + 'px';
+        }else{
+            if(finSize > 60) subChild.style.fontSize = 60 + 'px';
+        }
+    }
+</script>

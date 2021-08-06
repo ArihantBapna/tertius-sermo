@@ -1,0 +1,25 @@
+<script>
+    Reveal.initialize({
+        controls: false,
+        controlsTutorial: true,
+        progress: false,
+        slideNumber: false,
+        touch: false,
+        disableLayout: true,
+        loop: true,
+        display: 'flex',
+        plugins: [ RevealCustomControls ],
+        customcontrols: {
+            controls: [
+                { icon: '<i class="fa fa-caret-left"></i>',
+                    css: 'position: fixed; left: 10px; bottom: 50px; z-index: 30; font-size: 5rem;',
+                    action: 'doPrev(); return false;'
+                },
+                { icon: '<i class="fa fa-caret-right"></i>',
+                    css: 'position: fixed; right: 10px; bottom: 50px; z-index: 30; font-size: 5rem;',
+                    action: 'doNext(); return false;'
+                }
+            ]
+        },
+    });
+</script>

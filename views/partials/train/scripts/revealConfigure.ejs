@@ -1,0 +1,32 @@
+<script>
+    Reveal.configure({
+        keyboard:{
+            //Move to the right
+            39: () => {doNext()}, // Right arrow
+            76: null, // L
+            78: null, //N
+            32: null, // Space
+
+            //Move to the left
+            80: null, // P
+            37: () => {doPrev()}, // Left arrow
+            72: null, // H
+
+            //Move up
+            38: () => {doUp()}, // Up Arrow
+            75: null, // K
+
+            //Move down
+            40: () => {doDown()},
+            74: null, // J
+
+            // Pause
+            66: null, // B
+            190: null, // Period
+
+            // Overview
+            27: null, // Esc
+            //79: null, // O
+        }
+    });
+</script>

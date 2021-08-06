@@ -1,0 +1,15 @@
+<script>
+    Reveal.initialize().then(() => {
+        var slide = Reveal.getCurrentSlide();
+        var parent = slide.parentNode;
+        var child = slide.childNodes[1];
+        var subChild = child.childNodes[1];
+        fitty(child, {maxSize: 50});
+        if(parent.clientHeight < child.clientHeight){
+            if(parent.clientHeight === 0){
+                subChild.style.fontSize = parseFloat(window.getComputedStyle(subChild,null).getPropertyValue('font-size')) / 2 + 'px';
+            }
+        }
+        setMaxfont(subChild);
+    });
+</script>

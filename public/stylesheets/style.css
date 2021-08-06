@@ -9,8 +9,19 @@ body, html{
 
 .holder{
   overflow-y: auto;
+  touch-action: pan-y !important;
 }
-
+/*
+@media only screen and (max-width: 576px) {
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+ */
 .vertical-center {
   margin: 0;
   position: absolute;

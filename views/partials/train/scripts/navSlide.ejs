@@ -1,0 +1,32 @@
+<script>
+    var $prog = $('#progCount');
+    function doNext(){
+        Reveal.right();
+        adjustText(Reveal.getCurrentSlide());
+        var prog = (Reveal.getProgress() * 100);
+        $prog.width(prog+'%');
+
+    }
+    function doPrev(){
+        Reveal.left();
+        adjustText(Reveal.getCurrentSlide());
+        var prog = (Reveal.getProgress() * 100);
+        $prog.width(prog+'%');
+    }
+    function doUp(){
+        Reveal.up();
+        adjustText(Reveal.getCurrentSlide());
+    }
+    function doDown() {
+        Reveal.down();
+        adjustText(Reveal.getCurrentSlide());
+    }
+
+    function doRight(){
+        Reveal.right();
+    }
+
+    function doLeft(){
+        Reveal.left();
+    }
+</script>

@@ -1,0 +1,22 @@
+<script>
+    function adjustText(slide){
+        var parent = slide.parentNode;
+        var child = slide.childNodes[1];
+        var subChild = child.childNodes[1];
+        var size = parseFloat(window.getComputedStyle(subChild,null).getPropertyValue('font-size'));
+        fitty(child);
+        if(parent.clientHeight < child.clientHeight){
+            while(parent.clientHeight < child.clientHeight){
+                size = parseFloat(window.getComputedStyle(subChild,null).getPropertyValue('font-size'));
+                subChild.style.fontSize = (size / 1.3) + 'px';
+            }
+        }
+        if(parent.clientWidth < child.clientWidth){
+            while(parent.clientWidth < child.clientWidth){
+                size = parseFloat(window.getComputedStyle(subChild,null).getPropertyValue('font-size'));
+                subChild.style.fontSize = size - (size*0.1) + 'px';
+            }
+        }
+        setMaxfont(subChild);
+    }
+</script>

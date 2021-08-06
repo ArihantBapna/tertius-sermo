@@ -7,121 +7,18 @@
     <body>
         <%-include('../partials/globals/navbar.ejs')%>
 
-        <div class="holder" id="flashCards">
+        <%-include('../partials/train/progressBar.ejs')%>
 
-            <div class="reveal">
-                <div class="slides font-monospace">
-                    <%clues.forEach(c => {%>
-                        <section>
-                            <section class="vertical-center"><p><%-c.CLUE%></p></section>
-                            <section class="vertical-center"><p><%-c.ANSWER%></p></section>
-                            <section class="vertical-center"><p><%-c.ANSWER_ID%></p></section>
-                        </section>
-                    <%})%>
-                </div>
-            </div>
+        <div class="holder">
+
+            <%-include('../partials/train/slider.ejs')%>
 
         </div>
 
 
         <%-include('../partials/globals/footer.ejs')%>
-        <script src="/javascripts/plugins/customcontrol/plugin.js"></script>
-        <script src="/javascripts/fitty.js"></script>
-        <!-- Reveal configurations -->
-        <script>
-            function doNext(){
-                Reveal.right();
-                adjustText(Reveal.getCurrentSlide());
-            }
-            function doPrev(){
-                Reveal.left();
-                adjustText(Reveal.getCurrentSlide());
 
-            }
-            function doUp(){
-                Reveal.up();
-                adjustText(Reveal.getCurrentSlide());
-            }
-            function doDown() {
-                Reveal.down();
-                adjustText(Reveal.getCurrentSlide());
-
-            }
-
-            function adjustText(slide){
-                var child = slide.childNodes[0];
-                fitty(child);
-            }
-
-            Reveal.initialize({
-                controls: false,
-                controlsTutorial: true,
-                progress: false,
-                slideNumber: false,
-                touch: false,
-                disableLayout: true,
-                loop: true,
-                // Learn about plugins: https://revealjs.com/plugins/
-            });
-
-            Reveal.initialize().then(() => {
-                adjustText(Reveal.getCurrentSlide());
-            })
-            Reveal.configure({
-                keyboard:{
-                    //Move to the right
-                    39: () => {doNext()}, // Right arrow
-                    76: null, // L
-                    78: null, //N
-                    32: null, // Space
-
-                    //Move to the left
-                    80: null, // P
-                    37: () => {doPrev()}, // Left arrow
-                    72: null, // H
-
-                    //Move up
-                    38: () => {doUp()}, // Up Arrow
-                    75: null, // K
-
-                    //Move down
-                    40: () => {doDown()},
-                    74: null, // J
-
-                    // Pause
-                    66: null, // B
-                    190: null, // Period
-
-                    // Overview
-                    27: null, // Esc
-                    //79: null, // O
-
-
-
-                }
-            })
-        </script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-            var fc = document.getElementById("flashCards");
-            var mc = new Hammer(fc);
-            mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-            mc.on('swipeleft', function(ev) {
-               doNext();
-            });
-            mc.on('swiperight', function (ev){
-                doPrev();
-            });
-            mc.on('swipeup', function(ev){
-                console.log(ev);
-                doUp();
-            });
-            mc.on('swipedown', function(ev){
-                console.log(ev);
-               doDown();
-            });
-        </script>
+        <%-include('../partials/train/addScripts.ejs')%>
 
     </body>
 
