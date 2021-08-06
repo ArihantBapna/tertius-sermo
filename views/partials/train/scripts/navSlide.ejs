@@ -11,14 +11,15 @@
     }
     function doPrev(){
         var $slide = $(Reveal.getCurrentSlide().parentNode);
-        Reveal.right();
-        adjustText(Reveal.getCurrentSlide());
 
         //Add slide to stack between 7 and 25 elements from current index
-
         var rand = randomIntFromInterval(7,25)
         var $chosen = $slide.nextAll().slice(rand, rand+1);
         $slide.insertAfter($chosen);
+
+        //Move after insertion
+        Reveal.right();
+        adjustText(Reveal.getCurrentSlide());
     }
 
     function doUp(){
@@ -38,7 +39,8 @@
         Reveal.left();
         adjustText(Reveal.getCurrentSlide());
         completed--;
-        updateProg((completed / initTotal) * 100)
+        updateProg((completed / initTotal) * 100);
+
     }
 
     function updateProg(prog){
