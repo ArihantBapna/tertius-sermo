@@ -161,6 +161,9 @@ async function getCluesFromCat(set){
       });
    }
 
+   //Shuffle clues
+   clues = clues.sort(() => Math.random() - 0.5);
+
    return clues;
 }
 
