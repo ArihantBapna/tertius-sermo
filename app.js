@@ -98,7 +98,8 @@ if(process.env.NODE_ENV === 'production'){
     cors:{
       origin: 'https://tertius-sermo-web.herokuapp.com:'+(process.env.PORT || 3000),
       methods: ["GET", "POST"]
-    }
+    },
+    transports: ['polling']
   });
 }else{
   io = require('socket.io')(server, {
