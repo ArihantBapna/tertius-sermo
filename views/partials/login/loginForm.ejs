@@ -10,14 +10,14 @@
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                             <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
-                            <form action="/users/log" method="POST" onsubmit="pwd_handler(this);">
+                            <form action="/users/log" method="POST" onsubmit="pwd_handler(this);" autocomplete="on">
                                 <div class="form-outline form-white mb-4">
-                                    <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" />
+                                    <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" autocomplete="on"/>
                                     <label class="form-label" for="typeEmailX">Email</label>
                                 </div>
 
                                 <div class="form-outline form-white mb-4">
-                                    <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
+                                    <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" autocomplete="on"/>
                                     <input type="hidden" name="md5password" value="" />
                                     <label class="form-label" for="typePasswordX">Password</label>
                                 </div>

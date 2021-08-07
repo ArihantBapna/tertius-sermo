@@ -1,12 +1,18 @@
+<!-- Change to min after production -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+
 <script>
     var $prog = $('#progCount');
     var completed = 0;
     var initTotal = Reveal.getTotalSlides();
+    var socket = io({secure: true});
     function doNext(){
+        var id = $(Reveal.getCurrentSlide().parentNode).data('slide');
         Reveal.right();
         adjustText(Reveal.getCurrentSlide());
         completed++;
         updateProg((completed / initTotal) * 100);
+        socket.emit('markClue', id);
 
     }
     function doPrev(){

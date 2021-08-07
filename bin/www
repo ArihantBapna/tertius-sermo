@@ -9,6 +9,14 @@ var app = require('../app');
 var debug = require('debug')('tertius-sermo:server');
 var http = require('http');
 const answerModel = require("../models/answers");
+
+var cookieParser = require('cookie-parser');
+var cookie = require('cookie');
+
+var session = require('express-session');
+var sharedsession = require("express-socket.io-session");
+var sessionStore = new session.MemoryStore();
+
 /**
  * Get port from environment and store in Express.
  */
@@ -40,11 +48,40 @@ if(process.env.NODE_ENV === 'production'){
 }
 io.listen(server);
 
+var mySession = require('express-session')({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+  store: sessionStore
+})
+
+io.use(sharedsession(mySession));
+
+//Socket io handshake
+io.use(function (socket, next){
+  var handshake = socket.handshake;
+  var cookies = handshake.headers.cookie;
+  var parseCookie = cookie.parse(cookies);
+
+  var sess = cookieParser.signedCookie(parseCookie['connect.sid'],'secret');
+
+  console.log(sess);
+  console.log(sessionStore);
+
+
+  next();
+});
+
 //Socket.io controller (use in modules when setup)
 io.on('connection', (socket) => {
   socket.on('searchQuery', async (search) => {
     var answers = await answerModel.find({ANSWER: new RegExp(search, 'i')}).limit(100).sort({FREQUENCY: -1});
     socket.emit('found_answers', answers);
+  });
+  socket.on('markClue', async (clue) => {
+    console.log(socket.handshake);
+    console.log(clue);
+
   });
 });
 
