@@ -155,7 +155,7 @@ async function getCluesFromCat(set){
    answers.sort((a,b) => (a.FREQUENCY > b.FREQUENCY) ? 1 : -1);
    for(var i in answers){
       var ans = answers[i];
-      var tempClues = await clusterClues.find({ANSWER_ID: ans.ID}).limit(10).sort({FREQUENCY: -1});
+      var tempClues = await clusterClues.find({ANSWER_ID: ans.ID}).limit(10).sort({CLUE_FREQUENCY: -1});
       tempClues.forEach(t => {
          clues.push(t);
       });

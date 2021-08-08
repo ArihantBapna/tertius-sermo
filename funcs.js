@@ -19,6 +19,6 @@ module.exports = {
         }else{
             return "404";
         }
-    }
+    },
 
 }
