@@ -1,46 +1,81 @@
 <script>
     $(document).ready(function() {
+        if($selectedTable.bootstrapTable('getData').length > 0){
+            $('#mainRange').hide();
+            console.log('hidden');
+        }
         $('#saveButton').click(function (){
            var toSave = $selectedTable.bootstrapTable('getData');
            var total = calculateTotal();
+           var ansExists = false;
            if(total !== 1){
-               initToast.show();
-           }else{
-               var forToSave = [];
-               toSave.forEach(p => {
-                   forToSave.push({ANSWER: p.ANSWER, CATEGORY_NAME: p.CATEGORY_NAME, FREQUENCY: p.FREQUENCY, ID: p.ID});
-               });
-               var set = {
-                   cat14: $('#cat14').val(),
-                   cat15: $('#cat15').val(),
-                   cat16: $('#cat16').val(),
-                   cat17: $('#cat17').val(),
-                   cat18: $('#cat18').val(),
-                   cat19: $('#cat19').val(),
-                   cat20: $('#cat20').val(),
-                   cat21: $('#cat21').val(),
-                   cat22: $('#cat22').val(),
-                   cat25: $('#cat25').val(),
-                   cat26: $('#cat26').val(),
-                   answerLines: forToSave,
-                   name: $('#setName').text(),
-                   id: parseInt($('#setId').text())
+               if(toSave.length > 0){
+                   ansExists = true;
+                   save(toSave,ansExists);
+               }else{
+                   initToast.show();
                }
-               $.ajax({
-                   type: "POST",
-                   url: "../save",
-                   data: JSON.stringify(set),
-                   contentType: 'application/json',
-                   success: function(res){
-                       window.location.href = "/sets";
-                   }.bind(this),
-                   error: function(xhr, status, err){
-                       console.error(xhr, status, err.toString());
-                   }.bind(this)
-               });
+           }else{
+               if(toSave.length > 0) ansExists = true;
+               save(toSave, ansExists);
            }
 
         });
 
     });
+    function save(toSave, ansExists){
+        var forToSave = [];
+        toSave.forEach(p => {
+            forToSave.push({ANSWER: p.ANSWER, CATEGORY_NAME: p.CATEGORY_NAME, FREQUENCY: p.FREQUENCY, ID: p.ID});
+        });
+        var set;
+        if(ansExists){
+            set = {
+                cat14: 0,
+                cat15: 0,
+                cat16: 0,
+                cat17: 0,
+                cat18: 0,
+                cat19: 0,
+                cat20: 0,
+                cat21: 0,
+                cat22: 0,
+                cat25: 0,
+                cat26: 0,
+                answerLines: forToSave,
+                name: $('#setName').text(),
+                id: parseInt($('#setId').text())
+            }
+        }else{
+            set = {
+                cat14: $('#cat14').val(),
+                cat15: $('#cat15').val(),
+                cat16: $('#cat16').val(),
+                cat17: $('#cat17').val(),
+                cat18: $('#cat18').val(),
+                cat19: $('#cat19').val(),
+                cat20: $('#cat20').val(),
+                cat21: $('#cat21').val(),
+                cat22: $('#cat22').val(),
+                cat25: $('#cat25').val(),
+                cat26: $('#cat26').val(),
+                answerLines: forToSave,
+                name: $('#setName').text(),
+                id: parseInt($('#setId').text())
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "../save",
+            data: JSON.stringify(set),
+            contentType: 'application/json',
+            success: function(res){
+                window.location.href = "/sets";
+            }.bind(this),
+            error: function(xhr, status, err){
+                console.error(xhr, status, err.toString());
+            }.bind(this)
+        });
+    }
 </script>

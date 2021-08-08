@@ -38,33 +38,36 @@ router.post('/create', async function (req, res, next) {
     }
 
     var allSets = JSON.parse(req.session.sets);
-    createSet.id = allSets.length + 1;
     allSets.push(createSet);
+    createSet.id = allSets.length + 1;
 
     var total = parseFloat(createSet.cat14) + parseFloat(createSet.cat15) + parseFloat(createSet.cat16) + parseFloat(createSet.cat17) + parseFloat(createSet.cat18) + parseFloat(createSet.cat19) + parseFloat(createSet.cat20) + parseFloat(createSet.cat21) + parseFloat(createSet.cat22) + parseFloat(createSet.cat25) + parseFloat(createSet.cat26);
 
-    if(total !== 1){
+    if(total !== 1 && createSet.answerLines.length === 0){
         res.send('close');
     }else{
-        var count = 1;
-        allSets.forEach(p => {
-            p.id = count;
-            count++;
+        allSets.forEach((p,i) => {
+            p.id = i;
         });
 
         var query = {'username': req.session.username};
         var result = await userModel.updateOne(query, {sets: JSON.stringify(allSets)});
 
         req.session.sets = JSON.stringify(allSets);
-        res.send('success');
+        res.send(result);
     }
 });
 
 router.post('/save', async function (req, res, next) {
     var saveSet = req.body;
 
+    console.log(saveSet);
+
+
+    console.log('saving');
     //Generate answer lines and clues (if answerLines are empty)
     if(saveSet.answerLines.length == 0){
+        console.log('getting stuck here');
         saveSet = await getAnswersFromSet(saveSet);
     }else{
         //Just grab clues from AllClues if we have answerLines to train
@@ -72,9 +75,13 @@ router.post('/save', async function (req, res, next) {
     }
 
     var allSets = JSON.parse(req.session.sets);
+    console.log(allSets);
 
     var total = parseFloat(saveSet.cat14) + parseFloat(saveSet.cat15) + parseFloat(saveSet.cat16) + parseFloat(saveSet.cat17) + parseFloat(saveSet.cat18) + parseFloat(saveSet.cat19) + parseFloat(saveSet.cat20) + parseFloat(saveSet.cat21) + parseFloat(saveSet.cat22) + parseFloat(saveSet.cat25) + parseFloat(saveSet.cat26);
-    if(total !== 1){
+    console.log(total);
+
+
+    if(total !== 1 && saveSet.answerLines.length === 0){
         res.send('close');
     }else{
         var saveIndex = allSets.findIndex(i => i.id === saveSet.id);
@@ -139,63 +146,63 @@ async function getAnswersFromSet(set) {
      */
 
     if (set.cat14 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 14}).limit(Math.round(set.cat14) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 14}).limit((set.cat14) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat15 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 15}).limit(Math.round(set.cat15) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 15}).limit((set.cat15) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat16 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 16}).limit(Math.round(set.cat16) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 16}).limit((set.cat16) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat17 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 17}).limit(Math.round(set.cat17) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 17}).limit((set.cat17) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat18 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 18}).limit(Math.round(set.cat18) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 18}).limit((set.cat18) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat19 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 19}).limit(Math.round(set.cat19) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 19}).limit((set.cat19) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat20 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 20}).limit(Math.round(set.cat20) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 20}).limit((set.cat20) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat21 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 21}).limit(Math.round(set.cat21) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 21}).limit((set.cat21) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat22 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 22}).limit(Math.round(set.cat22) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 22}).limit((set.cat22) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat25 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 25}).limit(Math.round(set.cat25) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 25}).limit((set.cat25) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
     if (set.cat26 > 0) {
-        tempAnswers = await answerModel.find({CATEGORY_ID: 26}).limit(Math.round(set.cat26) * 20).sort({FREQUENCY: -1});
+        tempAnswers = await answerModel.find({CATEGORY_ID: 26}).limit((set.cat26) * 20).sort({FREQUENCY: -1});
         answerLines = answerLines.concat(tempAnswers);
         tempAnswers = [];
     }
 
     set = getClues(set, answerLines, 1);
-    
+
     return set;
 }
 
@@ -215,7 +222,7 @@ async function getClues(set, answerLines, type){
             clue_ids.push(el.ID);
         });
         var el = {
-            ID: ans.ANSWER_ID,
+            ID: ans.ID,
             ANSWER: ans.ANSWER,
             FREQUENCY: ans.FREQUENCY,
             CLUES_LOADED: clue_ids,
@@ -227,4 +234,5 @@ async function getClues(set, answerLines, type){
 
     return set;
 }
+
 module.exports = router;

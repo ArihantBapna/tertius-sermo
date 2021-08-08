@@ -8,7 +8,12 @@
                     var selected = $selectedTable.bootstrapTable('getSelections');
                     var toDel = selected.map(a => a.ID);
                     $selectedTable.bootstrapTable('remove',{field: 'ID', values: toDel});
-                    document.getElementById('totalSavedNum').text = parseInt(document.getElementById('totalSavedNum').text) - toDel.length;
+                    var remaining = parseInt(document.getElementById('totalSavedNum').text) - toDel.length;
+                    document.getElementById('totalSavedNum').text = remaining;
+                    if(remaining === 0){
+                        console.log('shown');
+                        $('#mainRange').show();
+                    }
                 },
                 attributes: {
                     style: "background-color: #dc3545 !important; border-color: #dc3545 !important"

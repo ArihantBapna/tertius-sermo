@@ -33,9 +33,13 @@
                     $table.bootstrapTable('uncheckAll');
                     $selectedTable.bootstrapTable('uncheckAll');
 
-                    document.getElementById('totalSavedNum').text = noRepeats.length + parseInt(document.getElementById('totalSavedNum').text);
+                    var adding = noRepeats.length + parseInt(document.getElementById('totalSavedNum').text)
+                    document.getElementById('totalSavedNum').text = adding;
                     document.getElementById('answerTitle').scrollIntoView();
 
+                    if(adding > 0){
+                        $('#mainRange').hide();
+                    }
 
                 },
                 attributes: {
