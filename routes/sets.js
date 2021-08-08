@@ -61,13 +61,10 @@ router.post('/create', async function (req, res, next) {
 router.post('/save', async function (req, res, next) {
     var saveSet = req.body;
 
-    console.log(saveSet);
 
 
-    console.log('saving');
     //Generate answer lines and clues (if answerLines are empty)
     if(saveSet.answerLines.length == 0){
-        console.log('getting stuck here');
         saveSet = await getAnswersFromSet(saveSet);
     }else{
         //Just grab clues from AllClues if we have answerLines to train
@@ -75,10 +72,8 @@ router.post('/save', async function (req, res, next) {
     }
 
     var allSets = JSON.parse(req.session.sets);
-    console.log(allSets);
 
     var total = parseFloat(saveSet.cat14) + parseFloat(saveSet.cat15) + parseFloat(saveSet.cat16) + parseFloat(saveSet.cat17) + parseFloat(saveSet.cat18) + parseFloat(saveSet.cat19) + parseFloat(saveSet.cat20) + parseFloat(saveSet.cat21) + parseFloat(saveSet.cat22) + parseFloat(saveSet.cat25) + parseFloat(saveSet.cat26);
-    console.log(total);
 
 
     if(total !== 1 && saveSet.answerLines.length === 0){
