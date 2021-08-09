@@ -52,6 +52,16 @@
         Reveal.left();
         adjustText(Reveal.getCurrentSlide());
         completed--;
+
+        var id = parseInt($(Reveal.getCurrentSlide().parentNode).data('slide').substring(2));
+        var ans_id = parseInt($(Reveal.getCurrentSlide().parentNode).data('answer').substring(2));
+        var ele = {
+            CLUE_ID: id,
+            ANSWER_ID: ans_id
+        };
+
+        socket.emit('backClue', ele);
+
         updateProg((completed / initTotal) * 100);
 
     }
@@ -71,4 +81,11 @@
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
+</script>
+
+
+<script>
+    socket.on('disconnect', () => {
+        disToast.show();
+    });
 </script>

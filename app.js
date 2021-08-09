@@ -161,6 +161,21 @@ io.on('connection', (socket) => {
     socket.handshake.session.chosenSet = chosenSet;
   });
 
+  //When someone moves backwards
+  socket.on('backClue', async (clue) => {
+    var chosenSet = socket.handshake.session.chosenSet;
+    for(var ans of chosenSet.selectAnswers){
+      if(ans.ID == clue.ANSWER_ID){
+        var ind = ans.CLUES_SEEN.indexOf(clue.CLUE_ID);
+        if(ind > -1){
+          ans.CLUES_SEEN.splice(ind, 1);
+          ans.CLUES_LOADED.push(clue.CLUE_ID);
+        }
+      }
+    }
+    socket.handshake.session.chosenSet = chosenSet;
+  })
+
   //Saving sets to MongoDB
   socket.on('saveSet', async () => {
     var chosenSet = socket.handshake.session.chosenSet;
@@ -180,10 +195,11 @@ io.on('connection', (socket) => {
 
     //Set the session sets to allSets
     socket.handshake.session.sets = JSON.stringify(allSets);
+    socket.handshake.session.chosenSet = chosenSet;
 
     socket.emit('savedSuccess');
 
-  })
+  });
 
 });
 

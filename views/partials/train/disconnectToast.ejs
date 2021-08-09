@@ -1,0 +1,15 @@
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="dangerToast" class="toast text-white align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toastyBod">
+                Disconnected from server
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script>
+    var toastyDis = document.getElementById('dangerToast');
+    var disToast = new bootstrap.Toast(toastyDis);
+</script>
