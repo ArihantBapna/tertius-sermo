@@ -7,6 +7,10 @@ var answerModel = require("../models/answers");
 
 var router = express.Router();
 
+router.get('/', async function(req,res,next){
+   res.render(funcs.checkLog(req,'pages/trainView'), {title: 'Select Train', loggedIn: req.session.loggedIn, sets: funcs.returnSets(req)})
+})
+
 router.get('/:setName', async function (req, res, next) {
    var set = funcs.getSelectedSet(req);
    if (set === '404') res.redirect('/');

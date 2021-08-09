@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="english">
+<!-- Header -->
+<%-include('../partials/globals/header.ejs')%>
+<!-- End Header -->
+
+    <body>
+        <%-include('../partials/globals/navbar.ejs')%>
+
+        <div class="holder">
+
+            <%-include('../partials/globals/loadingModal.ejs')%>
+
+            <%-include('../partials/sets/scripts/chartCdn.ejs')%>
+            <%-include('../partials/trainView/chart.ejs')%>
+        </div>
+
+        <%-include('../partials/globals/footer.ejs')%>
+        <%-include('../partials/globals/loadingModalInit.ejs')%>
+
+    </body>
+
+
+</html>

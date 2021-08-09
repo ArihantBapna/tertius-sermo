@@ -61,7 +61,7 @@ var session = require('express-session')({
   secret: 'secret',
   resave: true,
   saveUninitialized: true,
-  store: sessionStore
+  store: sessionStore,
 })
 
 app.use(session);

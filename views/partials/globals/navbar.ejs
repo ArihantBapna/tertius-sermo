@@ -15,7 +15,7 @@
                     <a <% if(title === 'Sets' || title === 'Edit Sets' || title === 'Create Sets') { %> class="nav-link active" <% } else { %> class="nav-link" <% } %> href="/sets">Sets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a <% if(title === 'Train' || title === 'Select Train') { %> class="nav-link active" <% } else { %> class="nav-link" <% } %> href="/train">Train</a>
                 </li>
             <%if(loggedIn){%>
                 <li class="nav-item">
