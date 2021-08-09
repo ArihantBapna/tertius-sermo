@@ -101,7 +101,7 @@ var io;
 if(process.env.NODE_ENV === 'production'){
   io = require('socket.io')(server, {
     cors:{
-      origin: 'https://tertius-sermo-web.herokuapp.com:'+(process.env.PORT || 3000),
+      origin: 'https://tertius-sermo.ml:'+(process.env.PORT || 3000),
       methods: ["GET", "POST"]
     },
     transports: ['polling']
