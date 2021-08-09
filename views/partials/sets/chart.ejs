@@ -14,12 +14,22 @@
                                 <a href="sets/edit/<%=value.name%>" class="btn btn-primary">Edit</a>
                             </div>
                             <div class="col">
-                                <a href="/train/<%=value.name%>" class="btn btn-success">Train</a>
+                                <a href="/train/<%=value.name%>" data-location="/train/<%=value.name%>" class="btn btn-success" id="trainButton">Train</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <script>
+                $(document).ready(function() {
+                    var $tb = $('#trainButton');
+                    $tb.click(function() {
+                       loadModal.show();
+                       window.location.replace($tb.data('location'));
+                    });
+                });
+            </script>
 
             <script>
                 var ctx = document.getElementById('<%=value.name%>').getContext('2d');
