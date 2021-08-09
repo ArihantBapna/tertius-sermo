@@ -7,12 +7,19 @@
     var initTotal = Reveal.getTotalSlides();
     var socket = io({secure: true});
     function doNext(){
-        var id = $(Reveal.getCurrentSlide().parentNode).data('slide');
+        var id = parseInt($(Reveal.getCurrentSlide().parentNode).data('slide').substring(2));
+        var ans_id = parseInt($(Reveal.getCurrentSlide().parentNode).data('answer').substring(2));
+        var ele = {
+            CLUE_ID: id,
+            ANSWER_ID: ans_id
+        };
+
         Reveal.right();
         adjustText(Reveal.getCurrentSlide());
         completed++;
         updateProg((completed / initTotal) * 100);
-        socket.emit('markClue', id);
+
+        socket.emit('markClue', ele);
 
     }
     function doPrev(){
@@ -47,6 +54,13 @@
         completed--;
         updateProg((completed / initTotal) * 100);
 
+    }
+
+    function doSave(){
+        socket.emit('saveSet');
+        socket.on('savedSuccess', () => {
+            initToast.show();
+        });
     }
 
     function updateProg(prog){

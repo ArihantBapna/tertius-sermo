@@ -17,7 +17,7 @@ router.get('/edit/:setName', function(req,res,next){
     if(set === '404'){
         res.redirect('/');
     }else{
-        res.render(funcs.checkLog(req,'pages/editSets'), {title: 'Edit Sets', loggedIn: req.session.loggedIn, chosenSet: set});
+        res.render(funcs.checkLog(req,'pages/editSets'), {title: 'Edit sets', loggedIn: req.session.loggedIn, chosenSet: set});
     }
 });
 

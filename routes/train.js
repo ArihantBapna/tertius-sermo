@@ -12,6 +12,7 @@ router.get('/:setName', async function (req, res, next) {
    if (set === '404') res.redirect('/');
    else {
       var clues = await getCluesFromSet(set);
+      req.session.chosenSet = set;
       res.render(funcs.checkLog(req, 'pages/train'), {title: 'Train', loggedIn: req.session.loggedIn, clues: clues});
    }
 
