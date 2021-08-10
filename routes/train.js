@@ -22,6 +22,29 @@ router.get('/:setName', async function (req, res, next) {
 
 });
 
+router.get('/progress/:setName', async function (req, res, next){
+   var set = funcs.getSelectedSet(req);
+   if(set === '404') res.redirect('/');
+   else{
+
+   }
+});
+
+async function getSeenUnseen(set){
+   var seen_clues = [];
+   var clue;
+   for(var ans of set.selectAnswers){
+      for(var clue_id of ans.CLUES_SEEN){
+         if(set.answerLines.length > 0){
+            clue = await allClues.find({ID: clue_id});
+         }else{
+            clue = await clusterClues.find({ID: clue_id});
+         }
+         seen_clues = seen_clues.concat(clue);
+      }
+   }
+}
+
 async function getCluesFromSet(set){
    var clues = [];
    for(var i in set.selectAnswers){
