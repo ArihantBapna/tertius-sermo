@@ -11,10 +11,10 @@
                     <div class="card-footer">
                         <div class="row d-flex justify-content-evenly">
                             <div class="col d-flex justify-content-center">
-                                <a href="/train/<%=value.name%>" data-location="/train/<%=value.name%>" class="btn btn-success" id="trainButton">Train</a>
+                                <button id="<%=value.name%>_button" onclick="moveToTrain(this.id)" data-location="/train/<%=value.name%>" class="btn btn-success">Train</button>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a href="/progress/<%=value.name%>" data-location="/progress/<%=value.name%>" class="btn btn-warning" id="progButton">Progress</a>
+                                <button id="<%=value.name%>_prog_button" onclick="moveToProgress(this.id)" data-location="/train/progress/<%=value.name%>" class="btn btn-warning">Progress</button>
                             </div>
                         </div>
 
@@ -23,13 +23,16 @@
             </div>
 
             <script>
-                $(document).ready(function() {
-                    var $tb = $('#trainButton');
-                    $tb.click(function() {
-                        loadModal.show();
-                        window.location.replace($tb.data('location'));
-                    });
-                });
+                function moveToTrain(id){
+                    var $tb = $(document.getElementById(id));
+                    loadModal.show();
+                    window.location.replace($tb.data('location'));
+                }
+                function moveToProgress(id){
+                    var $pb = $(document.getElementById(id));
+                    loadModal.show();
+                    window.location.replace($pb.data('location'));
+                }
             </script>
 
             <script>

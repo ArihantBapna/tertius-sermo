@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <table id="unseenTable" data-pagination="true" data-filter-control="true" data-show-search-clear-button="true">
+            <caption>
+                <h3>
+                    Clues yet to learn - <%-clues.UNSEEN.length%> / <%-clues.SEEN.length + clues.UNSEEN.length%>
+                </h3>
+            </caption>
+            <thead>
+            <tr>
+                <th data-field="ID" data-filter-control="input">Clue ID</th>
+                <th data-field="CLUE_FREQUENCY" data-sortable="true">Clue Frequency</th>
+                <th data-field="ANSWER_FREQUENCY" data-sortable="true">Answer Frequency</th>
+                <th data-field="CATEGORY_NAME" data-filter-control="select">Category</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script>
+    var $table = $('#unseenTable');
+    var dat = <%-JSON.stringify(clues.UNSEEN)%>
+        $table.bootstrapTable({data: dat});
+</script>

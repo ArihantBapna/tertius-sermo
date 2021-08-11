@@ -26,13 +26,15 @@ router.get('/progress/:setName', async function (req, res, next){
    var set = funcs.getSelectedSet(req);
    if(set === '404') res.redirect('/');
    else{
-
+      var clues = await getSeenUnseen(set);
+      res.render(funcs.checkLog(req, 'pages/progressView'), {title: 'Train Progress', loggedIn: req.session.loggedIn, clues: clues});
    }
 });
 
 async function getSeenUnseen(set){
    var seen_clues = [];
    var clue;
+   var totalClues;
    for(var ans of set.selectAnswers){
       for(var clue_id of ans.CLUES_SEEN){
          if(set.answerLines.length > 0){
@@ -43,6 +45,19 @@ async function getSeenUnseen(set){
          seen_clues = seen_clues.concat(clue);
       }
    }
+
+   var unseen_clues = [];
+   for(var ans1 of set.selectAnswers){
+      for(var clue_id1 of ans1.CLUES_LOADED){
+         if(set.answerLines.length > 0){
+            clue = await allClues.find({ID: clue_id1});
+         }else{
+            clue = await clusterClues.find({ID: clue_id1});
+         }
+         unseen_clues = unseen_clues.concat(clue);
+      }
+   }
+   return {SEEN: seen_clues, UNSEEN: unseen_clues};
 }
 
 async function getCluesFromSet(set){

@@ -1,8 +1,10 @@
 <!-- Change to min after production -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
-
+<!-- Color animation -->
+<script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
     var $prog = $('#progCount');
+    var $hold = $('#trainHold');
     var completed = 0;
     var initTotal = Reveal.getTotalSlides();
     var socket = io({secure: true});
@@ -13,8 +15,9 @@
             CLUE_ID: id,
             ANSWER_ID: ans_id
         };
-
+        $hold.animate({borderColor: 'green', duration: 400});
         Reveal.right();
+        $hold.animate({borderColor: '#111111', duration: 25})
         adjustText(Reveal.getCurrentSlide());
         completed++;
         updateProg((completed / initTotal) * 100);
@@ -31,7 +34,10 @@
         $slide.insertAfter($chosen);
 
         //Move after insertion
+        $hold.animate({borderColor: 'red', duration: 400});
         Reveal.right();
+        $hold.animate({borderColor: '#111111', duration: 25})
+
         adjustText(Reveal.getCurrentSlide());
     }
 

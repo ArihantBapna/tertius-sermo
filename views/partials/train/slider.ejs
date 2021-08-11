@@ -1,7 +1,7 @@
 <div class="reveal" id="flashCards">
     <div class="slides font-monospace">
         <%clues.forEach( (c,i) => {%>
-        <section class="d-flex" data-transition="none" data-slide="u_<%-c.ID%>" data-answer="u_<%-c.ANSWER_ID%>">
+        <section class="d-flex" data-transition="zoom" data-slide="u_<%-c.ID%>" data-answer="u_<%-c.ANSWER_ID%>">
             <section class="vertical-center justify-content-center">
                 <div>
                     <h2 class="text-wrap"><%-c.CLUE%></h2>

@@ -140,8 +140,8 @@ io.use(function (socket, next){
 //Socket.io controller (use in modules when setup)
 io.on('connection', (socket) => {
 
+  //Responds with answer lines for the selectAnswer tables within editSets & createSets
   socket.on('searchQuery', async (search) => {
-    //Responds with answer lines for the selectAnswer tables within editSets & createSets
     var answers = await answerModel.find({ANSWER: new RegExp(search, 'i')}).limit(100).sort({FREQUENCY: -1});
     socket.emit('found_answers', answers);
   });
@@ -159,6 +159,9 @@ io.on('connection', (socket) => {
       }
     }
     socket.handshake.session.chosenSet = chosenSet;
+
+    socket.handshake.session.save();
+
   });
 
   //When someone moves backwards
@@ -174,6 +177,9 @@ io.on('connection', (socket) => {
       }
     }
     socket.handshake.session.chosenSet = chosenSet;
+
+    socket.handshake.session.save();
+
   })
 
   //Saving sets to MongoDB
@@ -196,6 +202,8 @@ io.on('connection', (socket) => {
     //Set the session sets to allSets
     socket.handshake.session.sets = JSON.stringify(allSets);
     socket.handshake.session.chosenSet = chosenSet;
+
+    socket.handshake.session.save();
 
     socket.emit('savedSuccess');
 

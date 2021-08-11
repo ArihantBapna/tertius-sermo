@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <table id="progressTable" data-pagination="true" data-filter-control="true" data-show-search-clear-button="true">
+            <caption>
+                <h3>
+                    Clues you've learnt - <%-clues.SEEN.length%> / <%-clues.SEEN.length + clues.UNSEEN.length%>
+                </h3>
+            </caption>
+            <thead>
+            <tr>
+                <th data-field="ANSWER" data-filter-control="select">Answer</th>
+                <th data-field="CLUE" data-filter-control="input">Clue</th>
+                <th data-field="CLUE_FREQUENCY" data-sortable="true">Clue Frequency</th>
+                <th data-field="ANSWER_FREQUENCY" data-sortable="true">Answer Frequency</th>
+                <th data-field="CATEGORY_NAME" data-filter-control="select">Category</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script>
+    var $table = $('#progressTable');
+    var dat = <%-JSON.stringify(clues.SEEN)%>
+        $table.bootstrapTable({data: dat});
+</script>

@@ -4,12 +4,15 @@
     <%-include('../partials/globals/header.ejs')%>
     <!-- End Header -->
 
+    <!-- Add gui confirmation of mark -->
+    <!-- Save on page disconnect automatically -->
+
     <body>
         <%-include('../partials/globals/navbar.ejs')%>
 
         <%-include('../partials/train/progressBar.ejs')%>
 
-        <div class="holder">
+        <div class="holder" id="trainHold" style="border-width: 0.3rem; border-style: solid; border-color: #111111">
 
             <%-include('../partials/train/slider.ejs')%>
 
