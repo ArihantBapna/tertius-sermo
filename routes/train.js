@@ -27,6 +27,7 @@ router.get('/progress/:setName', async function (req, res, next){
    if(set === '404') res.redirect('/');
    else{
       var clues = await getSeenUnseen(set);
+      req.session.chosenSet = set;
       res.render(funcs.checkLog(req, 'pages/progressView'), {title: 'Train Progress', loggedIn: req.session.loggedIn, clues: clues, footerText: funcs.getFooterText()});
    }
 });

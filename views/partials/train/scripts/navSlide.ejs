@@ -74,9 +74,12 @@
 
     function doSave(){
         socket.emit('saveSet');
+        //Whether to show saved progress prompts or not
+        /*
         socket.on('savedSuccess', () => {
             initToast.show();
         });
+         */
     }
 
     function updateProg(prog){
@@ -91,6 +94,16 @@
 
 
 <script>
+    socket.on('finishedMove', () => {
+        //Whether to show saved progress prompts or not
+        /*
+        socket.emit('saveSet');
+        socket.on('savedSuccess', () => {
+            initToast.show();
+        });
+         */
+    })
+
     socket.on('disconnect', () => {
         disToast.show();
     });

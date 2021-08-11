@@ -162,6 +162,7 @@ io.on('connection', (socket) => {
 
     socket.handshake.session.save();
 
+    socket.emit('finishedMove');
   });
 
   //When someone moves backwards
@@ -180,7 +181,8 @@ io.on('connection', (socket) => {
 
     socket.handshake.session.save();
 
-  })
+    socket.emit('finishedMove');
+  });
 
   //Saving sets to MongoDB
   socket.on('saveSet', async () => {
@@ -206,6 +208,78 @@ io.on('connection', (socket) => {
     socket.handshake.session.save();
 
     socket.emit('savedSuccess');
+
+  });
+
+  //Add more clues to the set
+  socket.on('addClues', async () => {
+    var chosenSet = socket.handshake.session.chosenSet;
+    var allSets = JSON.parse(socket.handshake.session.sets);
+
+    //Add clues to every answer that has more clues for you
+    for(var ans of chosenSet.selectAnswers){
+      var cluesAdd = [];
+      var clues = [];
+      if(chosenSet.answerLines.length > 0){
+        clues = await cluesModel.find({ANSWER_ID: ans.ID}).limit(50).sort({CLUE_FREQUENCY: -1});
+      }else{
+        clues = await clusterModel.find({ANSWER_ID: ans.ID}).limit(50).sort({CLUE_FREQUENCY: -1});
+      }
+      for(var clue of clues){
+        if(!ans.CLUES_SEEN.includes(clue.ID)){
+          cluesAdd = cluesAdd.concat(clue.ID);
+        }
+        if(cluesAdd.length > 4){
+          break;
+        }
+      }
+      if(cluesAdd.length == 0){
+        ans.COMPLETE = true;
+        addAnswers++;
+      }else{
+        ans.CLUES_LOADED = ans.CLUES_LOADED.concat(cluesAdd);
+      }
+    }
+
+    var saveIndex = allSets.findIndex(i => i.id === chosenSet.id);
+    allSets[saveIndex] = chosenSet;
+
+    var count = 1;
+    allSets.forEach(p => {
+      p.id = count;
+      count++;
+    });
+
+    //Save to mongodb
+    var query = {'username': socket.handshake.session.username};
+    var result = await userModel.updateOne(query, {sets: JSON.stringify(allSets)});
+
+    socket.handshake.session.sets = JSON.stringify(allSets);
+    socket.handshake.session.chosenSet = chosenSet;
+
+    socket.handshake.session.save();
+    socket.emit('addedClues');
+  });
+
+  socket.on('haveDiscon', async (reason) => {
+
+    console.log('saving');
+
+    var chosenSet = socket.handshake.session.chosenSet;
+    var allSets = JSON.parse(socket.handshake.session.sets);
+
+    var saveIndex = allSets.findIndex(i => i.id === chosenSet.id);
+    allSets[saveIndex] = chosenSet;
+
+    var count = 1;
+    allSets.forEach(p => {
+      p.id = count;
+      count++;
+    });
+
+    //Save to mongodb
+    var query = {'username': socket.handshake.session.username};
+    var result = await userModel.updateOne(query, {sets: JSON.stringify(allSets)});
 
   });
 

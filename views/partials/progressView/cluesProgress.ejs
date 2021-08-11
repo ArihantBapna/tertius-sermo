@@ -1,0 +1,22 @@
+<div class="container" style="margin-top: 1rem;">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h4>Add More Clues</h4>
+        </div>
+        <div class="col-md-6 col-12 d-inline-flex justify-content-end px-3">
+            <button onclick="addClues()" class="btn btn-warning">Clues <i class="fa fa-plus"></i></button>
+            <!--<button class="btn btn-primary">Answers</button>-->
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+<script>
+    var socket = io({secure: true});
+    function addClues(){
+        loadModal.show();
+        socket.emit('addClues');
+    }
+    socket.on('addedClues', () => {
+        window.location.href = '/train';
+    });
+</script>

@@ -11,11 +11,17 @@
 
     <%-include('../partials/editSets/scripts/tableInitScript.ejs')%>
     <div class="holder">
+
+
+        <%-include('../partials/globals/loadingModal.ejs')%>
+        <%-include('../partials/progressView/cluesProgress.ejs')%>
+
         <%-include('../partials/progressView/seenTable.ejs')%>
         <%-include('../partials/progressView/unseenTable.ejs')%>
     </div>
 
     <%-include('../partials/globals/footer.ejs')%>
+    <%-include('../partials/globals/loadingModalInit.ejs')%>
 
     </body>
 
