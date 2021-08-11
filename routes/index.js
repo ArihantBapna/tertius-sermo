@@ -4,7 +4,7 @@ var funcs = require('../funcs.js')
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-  res.render(funcs.checkLog(req,'pages/index'), { title: 'Home',loggedIn: req.session.loggedIn});
+  res.render(funcs.checkLog(req,'pages/index'), { title: 'Home',loggedIn: req.session.loggedIn, footerText: funcs.getFooterText()});
 });
 
 router.get('/logout', function (req,res,next){

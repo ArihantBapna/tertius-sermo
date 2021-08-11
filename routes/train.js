@@ -8,7 +8,7 @@ var answerModel = require("../models/answers");
 var router = express.Router();
 
 router.get('/', async function(req,res,next){
-   res.render(funcs.checkLog(req,'pages/trainView'), {title: 'Select Train', loggedIn: req.session.loggedIn, sets: funcs.returnSets(req)})
+   res.render(funcs.checkLog(req,'pages/trainView'), {title: 'Select Train', loggedIn: req.session.loggedIn, sets: funcs.returnSets(req), footerText: funcs.getFooterText()})
 })
 
 router.get('/:setName', async function (req, res, next) {
@@ -17,7 +17,7 @@ router.get('/:setName', async function (req, res, next) {
    else {
       var clues = await getCluesFromSet(set);
       req.session.chosenSet = set;
-      res.render(funcs.checkLog(req, 'pages/train'), {title: 'Train', loggedIn: req.session.loggedIn, clues: clues});
+      res.render(funcs.checkLog(req, 'pages/train'), {title: 'Train', loggedIn: req.session.loggedIn, clues: clues, footerText: funcs.getFooterText()});
    }
 
 });
@@ -27,7 +27,7 @@ router.get('/progress/:setName', async function (req, res, next){
    if(set === '404') res.redirect('/');
    else{
       var clues = await getSeenUnseen(set);
-      res.render(funcs.checkLog(req, 'pages/progressView'), {title: 'Train Progress', loggedIn: req.session.loggedIn, clues: clues});
+      res.render(funcs.checkLog(req, 'pages/progressView'), {title: 'Train Progress', loggedIn: req.session.loggedIn, clues: clues, footerText: funcs.getFooterText()});
    }
 });
 

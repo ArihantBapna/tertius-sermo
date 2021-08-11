@@ -9,7 +9,7 @@ var cluesModel = require('../models/clusterClues');
 var allClues = require('../models/allClues');
 
 router.get('/', function(req, res, next) {
-    res.render(funcs.checkLog(req,'pages/sets'), { title: 'Sets',loggedIn: req.session.loggedIn, sets: funcs.returnSets(req)});
+    res.render(funcs.checkLog(req,'pages/sets'), { title: 'Sets',loggedIn: req.session.loggedIn, sets: funcs.returnSets(req), footerText: funcs.getFooterText()});
 });
 
 router.get('/edit/:setName', function(req,res,next){
@@ -17,12 +17,12 @@ router.get('/edit/:setName', function(req,res,next){
     if(set === '404'){
         res.redirect('/');
     }else{
-        res.render(funcs.checkLog(req,'pages/editSets'), {title: 'Edit sets', loggedIn: req.session.loggedIn, chosenSet: set});
+        res.render(funcs.checkLog(req,'pages/editSets'), {title: 'Edit sets', loggedIn: req.session.loggedIn, chosenSet: set, footerText: funcs.getFooterText()});
     }
 });
 
 router.get('/create', function(req,res,next){
-   res.render(funcs.checkLog(req,'pages/createSet'), {title: 'Create Sets', loggedIn: req.session.loggedIn});
+   res.render(funcs.checkLog(req,'pages/createSet'), {title: 'Create Sets', loggedIn: req.session.loggedIn, footerText: funcs.getFooterText()});
 });
 
 router.post('/create', async function (req, res, next) {
