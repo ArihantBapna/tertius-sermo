@@ -58,7 +58,7 @@ app.use(cors());
 
 //Express sessions initialization: Note: add secret key to 'secret'.
 var session = require('express-session')({
-  secret: 'secret',
+  secret: process.env.SESSION_KEY,
   resave: true,
   saveUninitialized: true,
   store: sessionStore,
@@ -235,7 +235,6 @@ io.on('connection', (socket) => {
       }
       if(cluesAdd.length == 0){
         ans.COMPLETE = true;
-        addAnswers++;
       }else{
         ans.CLUES_LOADED = ans.CLUES_LOADED.concat(cluesAdd);
       }

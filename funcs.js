@@ -23,6 +23,16 @@ module.exports = {
     getFooterText: function(){
         var possibilities = ["I was bored", "Stop reading this, go study", "Homies >> Women", "*high pitched* Welcome to Hotel California", "Anyone wanna play league with me?", "Code monkey go brrrr", "It's 3 am, go sleep my guy", "Woo! That'll impress her, I'm sure", "Everything mean's nothing if I can't have you", "One rep for one bug, build muscles and sadness together", "My social battery has been running on empty for 18 years", "So like a bird flu going around or something?", "Still mad about the food at homecoming", "Will you do pair programming with me? haha just kidding.. Unless - ", "I said I'll switch to Linux, don't take my kneecaps Mr Torvald", "Oh God I haven't left the house in two years, THIS IS AMAZING"];
         return possibilities[Math.floor(Math.random()*possibilities.length)];
+    },
+    generateTextId: function(length){
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
     }
 
 }
