@@ -6,7 +6,6 @@
     var $prog = $('#progCount');
     var $hold = $('#trainHold');
     var completed = 0;
-    var initTotal = Reveal.getTotalSlides();
     var socket = io({secure: true});
     function doNext(){
         var id = parseInt($(Reveal.getCurrentSlide().parentNode).data('slide').substring(2));
@@ -20,9 +19,11 @@
         $hold.animate({borderColor: '#111111', duration: 25})
         adjustText(Reveal.getCurrentSlide());
         completed++;
-        updateProg((completed / initTotal) * 100);
 
         socket.emit('markClue', ele);
+
+        updateProg((completed / (Reveal.getTotalSlides() / 3)) * 100);
+
 
     }
     function doPrev(){
@@ -68,7 +69,7 @@
 
         socket.emit('backClue', ele);
 
-        updateProg((completed / initTotal) * 100);
+        updateProg((completed / (Reveal.getTotalSlides() / 3)) * 100);
 
     }
 
@@ -84,6 +85,9 @@
 
     function updateProg(prog){
         $prog.width(prog+'%');
+        if(prog === 100){
+            window.location.href = '/train/'
+        }
     }
 
     function randomIntFromInterval(min, max) { // min and max included
@@ -95,9 +99,8 @@
 
 <script>
     socket.on('finishedMove', () => {
-        //Whether to show saved progress prompts or not
-        /*
         socket.emit('saveSet');
+        /*Whether to show saved progress prompts or not
         socket.on('savedSuccess', () => {
             initToast.show();
         });

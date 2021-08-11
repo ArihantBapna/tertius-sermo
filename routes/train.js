@@ -17,7 +17,11 @@ router.get('/:setName', async function (req, res, next) {
    else {
       var clues = await getCluesFromSet(set);
       req.session.chosenSet = set;
-      res.render(funcs.checkLog(req, 'pages/train'), {title: 'Train', loggedIn: req.session.loggedIn, clues: clues, footerText: funcs.getFooterText()});
+      if(clues.length > 0){
+         res.render(funcs.checkLog(req, 'pages/train'), {title: 'Train', loggedIn: req.session.loggedIn, clues: clues, footerText: funcs.getFooterText()});
+      }else{
+         res.redirect('/train/progress/'+req.params.setName);
+      }
    }
 
 });
