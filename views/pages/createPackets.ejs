@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="english">
+    <!-- Header -->
+    <%-include('../partials/globals/header.ejs')%>
+    <!-- End Header -->
+
+    <body>
+        <%-include('../partials/globals/navbar.ejs')%>
+
+        <div class="holder">
+
+            <%-include('../partials/globals/loadingModal.ejs')%>
+
+            <!--
+            packet:
+                name,
+                id,
+                uid,
+                categories [jObs]
+                    id
+                    name
+                    tossups
+                    bonuses
+                password
+                public/private
+            -->
+
+        </div>
+
+        <%-include('../partials/globals/footer.ejs')%>
+
+        <%-include('../partials/globals/loadingModalInit.ejs')%>
+
+    </body>
+
+</html>
